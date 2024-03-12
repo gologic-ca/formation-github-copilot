@@ -11,17 +11,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-        python-version: '3.x'
+        node-version: '18'
 
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install PyGithub
+      run: npm install
 
     - name: Close invalid issues
-      run: python .github/actions/close_invalid_issues.py
+      run: node  .github/actions/close_invalid_issues.ts
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
